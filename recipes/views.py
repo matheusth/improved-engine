@@ -4,12 +4,12 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(_):
-    HttpResponse("Home")
+    return HttpResponse("Home")
 
 
 def contato(_):
-    HttpResponse("Contato")
+    return HttpResponse("Contato")
 
 
 def sobre(_):
-    HttpResponse("Sobre")
+    return HttpResponse("Sobre")
