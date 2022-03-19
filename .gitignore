@@ -1,0 +1,6 @@
+.venv
+.DS_STORE
+.pyc
+**/**/migrations/**
+__pycache__
+
