@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
+{% include 'recipes/partials/head.html' %}
 <body>
-$END$
+{% include 'recipes/partials/header.html' %}
+{% include 'recipes/partials/search-field.html' %}
+
+<div class="main-content-container">
+    <div class="main-content main-content-detail container">
+        {% include 'recipes/partials/recipe.html' %}
+    </div>
+</div>
+{% include 'recipes/partials/footer.html' %}
 </body>
 </html>

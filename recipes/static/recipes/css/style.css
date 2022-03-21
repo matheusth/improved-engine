@@ -158,11 +158,11 @@ h5 {
     max-width: 100%;
 }
 
-.recipe-list-item {
+.main-content-list .recipe-list-item {
     max-width: 64rem;
 }
 
-.recipe-list-item:hover {
+.main-content-list .recipe-list-item:hover {
     transform: scale(1.02);
     box-shadow: -10px 10px 10px rgba(0, 0, 0, .3);
 }
@@ -174,7 +174,6 @@ h5 {
 
 .recipe-author {
     padding: 0 var(--spacing-gutter-medium);
-
 }
 
 .recipe-author a {
@@ -251,4 +250,9 @@ h5 {
 
 .main-footer a:hover {
     filter: brightness(.8);
+}
+
+.main-content-detail .recipe-list-item {
+    margin: 0 auto;
+    max-width: 84rem;
 }
