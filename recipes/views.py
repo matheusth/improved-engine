@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from utils.recipes.recipes_generator import make_recipe
+from django.shortcuts import render, get_object_or_404
 from recipes.models import Recipe
 
 
@@ -20,7 +19,8 @@ def category(request, category_id):
 
 
 def recipe(request, recipe_id):
+    selected_recipe = get_object_or_404(Recipe, id=recipe_id)
     return render(request, 'recipes/pages/recipe-view.html', context={
-        'recipe': make_recipe(),
+        'recipe': selected_recipe,
         'is_detail_page': True,
     })
