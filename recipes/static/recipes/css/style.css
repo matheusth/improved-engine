@@ -160,6 +160,7 @@ h5 {
 
 .main-content-list .recipe-list-item {
     max-width: 64rem;
+    height: fit-content;
 }
 
 .main-content-list .recipe-list-item:hover {
@@ -255,4 +256,9 @@ h5 {
 .main-content-detail .recipe-list-item {
     margin: 0 auto;
     max-width: 84rem;
+}
+
+.preparation-steps{
+    padding: 3rem 4rem;
+    text-align: justify;
 }
