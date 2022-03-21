@@ -12,11 +12,10 @@
                     <i class="fas fa-calendar-alt"></i>
                         {{ recipe.created_at | date:'d/m/Y' }} às
                     {{ recipe.created_at | date:'H:i' }}
-                    <i class="fas fa-layers">
-                        <a href="/recipes/categorias/cafe-da-manha">
+                    <i class="fas fa-layer-group"></i>
+                        <a href="{% url 'recipes:category' recipe.category.id %}">
                             {{ recipe.category.name }}
                         </a>
-                    </i>
                 </span>
     </div>
     <div class="recipe-content">
