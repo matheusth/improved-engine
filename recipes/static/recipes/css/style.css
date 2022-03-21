@@ -57,6 +57,9 @@ body {
     font-family: var(--font-primary);
     background-color: var(--color-gray-1);
     color: var(--color-dark-text);
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
 }
 
 h1,
@@ -103,6 +106,7 @@ h5 {
 .search-form {
     border: .2rem solid var(--color-primary-dark);
     max-width: 64rem;
+    min-width: 50vw;
     margin: 0 auto;
     border-radius: .4rem;
     position: relative;
@@ -240,6 +244,8 @@ h5 {
     background-color: var(--color-primary-dark);
     font-weight: bold;
     color: var(--color-white);
+    justify-self: flex-end;
+    margin-top: auto;
 }
 
 .main-footer a {
