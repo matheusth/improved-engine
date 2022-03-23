@@ -1,12 +1,11 @@
-from django.test import TestCase  # type: ignore
 from django.urls import reverse, resolve  # type: ignore
 from recipes import views  # type: ignore
+from .test_recipe_base import RecipeTestBase
+from ..models import Recipe
 
 
-# Create your tests here.
+class RecipeViewsTest(RecipeTestBase):
 
-
-class RecipeViewsTest(TestCase):
     def test_recipes_home_view_function_is_correct(self):
         view = resolve(reverse('recipes:home'))
         self.assertIs(view.func, views.home)
@@ -19,7 +18,16 @@ class RecipeViewsTest(TestCase):
         response = self.client.get(reverse('recipes:home'))
         self.assertTemplateUsed(response, 'recipes/home.html')
 
+    def test_recipes_home_template_loads_recipes(self):
+        recipe = self.make_recipe()
+        response = self.client.get(reverse('recipes:home'))
+        recipes = response.context['recipes']
+
+        self.assertIn(recipe, recipes)
+        self.assertTemplateUsed(response, 'recipes/partials/recipe.html')
+
     def test_recipes_home_view_shows_no_recipes_found(self):
+
         response = self.client.get(reverse('recipes:home'))
         content = response.content.decode('utf-8')
         self.assertIn('não encontradas.', content)
