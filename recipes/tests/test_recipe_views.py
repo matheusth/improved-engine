@@ -23,8 +23,7 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:home'))
         recipes = response.context['recipes']
 
-        self.assertIn(recipe, recipes)
-        self.assertTemplateUsed(response, 'recipes/partials/recipe.html')
+        self.assertIn(recipe, recipes, "recipe not loaded in the context variable of the view")
 
     def test_recipes_home_view_shows_no_recipes_found(self):
 
