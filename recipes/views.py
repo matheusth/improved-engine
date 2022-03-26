@@ -23,7 +23,7 @@ def category(request, category_id):
 
 
 def recipe(request, recipe_id):
-    selected_recipe = get_object_or_404(Recipe, id=recipe_id)
+    selected_recipe = get_object_or_404(Recipe, id=recipe_id, published=True)
     return render(request, 'recipes/pages/recipe-view.html', context={
         'recipe': selected_recipe,
         'is_detail_page': True,
