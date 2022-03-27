@@ -14,7 +14,7 @@ def home(request):
 
 def category(request, category_id):
     recipes = get_list_or_404(Recipe.objects.filter(category__id=category_id,
-                              published=True).order_by("-id"))
+                                                    published=True).order_by("-id"))
 
     return render(request, 'recipes/pages/category-view.html', context={
         'recipes': recipes,
@@ -28,3 +28,7 @@ def recipe(request, recipe_id):
         'recipe': selected_recipe,
         'is_detail_page': True,
     })
+
+
+def search(request):
+    return Http404()
