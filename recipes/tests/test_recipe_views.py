@@ -1,7 +1,6 @@
 from django.urls import reverse, resolve  # type: ignore
 from recipes import views  # type: ignore
 from .test_recipe_base import RecipeTestBase
-from ..models import Recipe
 
 
 class RecipeViewsTest(RecipeTestBase):
@@ -80,3 +79,7 @@ class RecipeViewsTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:recipe', kwargs={'recipe_id': recipe.id}))
 
         self.assertEqual(404, response.status_code, "unpublished recipe loaded")
+
+    def test_recipes_search_is_calling_the_correct_view(self):
+        resolved = resolve(reverse('recipes:search'))
+        self.assertIs(resolved.func, views.search)
