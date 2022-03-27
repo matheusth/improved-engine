@@ -33,4 +33,4 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return f"{self.title} by {self.author}"
+        return f"{self.title} por {self.author}"

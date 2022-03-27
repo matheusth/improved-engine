@@ -33,4 +33,32 @@ class RecipeModelTest(RecipeTestBase):
         )
 
         self.assertIs(local_recipe.published, False, msg="published didn't default to false.")
-        self.assertIs(local_recipe.published, False, msg="preparation_steps_is_html didn't default to false.")
+        self.assertIs(local_recipe.published, False,
+                      msg="preparation_steps_is_html didn't default to false.")
+
+    def test_recipe_model_string_representation(self):
+        self.recipe.title = "Teste"
+        self.recipe.author = self.make_author(username="second", first_name="autor")
+        self.recipe.full_clean()
+        self.recipe.save()
+
+        self.assertEqual(str(self.recipe), "Teste por second",
+                         msg="Recipe string representation must be in the format '\
+                         '<recipe-title> por <author-first-name>'")
+
+
+class CategoryModelTest(RecipeTestBase):
+    def setUp(self) -> None:
+        self.category = self.make_category()
+        return super().setUp()
+
+    def test_category_name_raises_exception_if_exceeds_65_chars(self):
+        self.category.name = "A" * 66
+        with self.assertRaises(ValidationError):
+            self.category.full_clean()
+
+    def test_category_representation_string_is_equal_category_name(self):
+        self.category.name = "Teste"
+        self.category.full_clean()
+        self.category.save()
+        self.assertEqual(str(self.category), "Teste")
