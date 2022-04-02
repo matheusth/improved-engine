@@ -1,6 +1,6 @@
 <div class="container">
-    <form action="" class="search-form" autocomplete="off">
-        <input type="search" name="query" class="search-field">
+    <form action="{% url 'recipes:search' %}" class="search-form" autocomplete="off">
+        <input type="search" name="query" class="search-field" required>
         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
     </form>
 </div>

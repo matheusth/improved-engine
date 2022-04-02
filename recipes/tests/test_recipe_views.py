@@ -85,6 +85,10 @@ class RecipeViewsTest(RecipeTestBase):
         self.assertIs(resolved.func, views.search)
 
     def test_recipes_search_load_wanted_template(self):
-        response = self.client.get(reverse('recipes:search'))
+        response = self.client.get(reverse('recipes:search'), data={'search': 'points'})
 
         self.assertTemplateUsed(response, 'recipes/home.html')
+
+    def test_recipe_search_raises_404_if_no_search_term(self):
+        response = self.client.get(reverse('recipes:search'))
+        self.assertEqual(response.status_code, 404)

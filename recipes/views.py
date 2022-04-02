@@ -1,6 +1,6 @@
-from django.shortcuts import render, get_object_or_404, get_list_or_404
-from recipes.models import Recipe
 from django.http import Http404
+from django.shortcuts import render, get_object_or_404, get_list_or_404  # type: ignore
+from recipes.models import Recipe  # type: ignore
 
 
 # Create your views here.
@@ -31,4 +31,9 @@ def recipe(request, recipe_id):
 
 
 def search(request):
+    search_term = request.GET.get("search")
+
+    if not search_term:
+        raise Http404()
+
     return render(request, 'recipes/home.html')
