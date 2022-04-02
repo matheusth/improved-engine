@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404  # type: ignore
 from django.shortcuts import render, get_object_or_404, get_list_or_404  # type: ignore
 from recipes.models import Recipe  # type: ignore
 
@@ -31,9 +31,12 @@ def recipe(request, recipe_id):
 
 
 def search(request):
-    search_term = request.GET.get("search")
+    search_term: str = request.GET.get("query", '')
 
-    if not search_term:
+    if search_term.strip() == '':
         raise Http404()
 
-    return render(request, 'recipes/home.html')
+    return render(request, 'recipes/pages/search.html', {
+        'page_title': f'Pesquisa por "{search_term}"',
+        'search_term': search_term
+    })

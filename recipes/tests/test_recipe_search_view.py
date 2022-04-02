@@ -3,7 +3,7 @@ from recipes import views  # type: ignore
 from .test_recipe_base import RecipeTestBase
 
 
-class RecipeViewsTest(RecipeTestBase):
+class RecipeSearchViewTest(RecipeTestBase):
 
     def test_recipes_search_is_calling_the_correct_view(self):
         resolved = resolve(reverse('recipes:search'))
