@@ -31,4 +31,4 @@ def recipe(request, recipe_id):
 
 
 def search(request):
-    return Http404()
+    return render(request, 'recipes/home.html')
