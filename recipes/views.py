@@ -1,4 +1,5 @@
 from django.http import Http404  # type: ignore
+from django.db.models import Q  # type: ignore
 from django.shortcuts import render, get_object_or_404, get_list_or_404  # type: ignore
 from recipes.models import Recipe  # type: ignore
 
@@ -36,7 +37,17 @@ def search(request):
     if search_term.strip() == '':
         raise Http404()
 
+    recipes = Recipe.objects.filter(
+        Q(
+            Q(title__icontains=search_term) |
+            Q(description__icontains=search_term)
+        ),
+        published=True
+
+    ).order_by("-id")
+
     return render(request, 'recipes/pages/search.html', {
         'page_title': f'Pesquisa por "{search_term}"',
-        'search_term': search_term
+        'search_term': search_term,
+        'recipes': recipes
     })

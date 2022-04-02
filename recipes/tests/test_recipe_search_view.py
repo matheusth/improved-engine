@@ -22,3 +22,32 @@ class RecipeSearchViewTest(RecipeTestBase):
         response = self.client.get(reverse('recipes:search'), data={'query': '<points>'})
 
         self.assertIn('Pesquisa por &quot;&lt;points&gt;&quot;', response.content.decode("utf-8"))
+
+    def test_recipe_search_can_find_recipes_by_title(self):
+        title_one = 'This is recipe one'
+        title_two = 'This is recipe two'
+        recipe_one = self.make_recipe(
+            slug='recipe-one', title=title_one, author_data={'username': 'user_one'}
+        )
+        recipe_two = self.make_recipe(
+            slug='recipe-two', title=title_two, author_data={'username': 'user_two'}
+        )
+        url = reverse('recipes:search')
+        response_one = self.client.get(url, data={'query': title_one})
+        response_two = self.client.get(url, data={'query': title_two})
+        response_both = self.client.get(url, data={'query': 'This is'})
+
+        self.assertIn(recipe_one, response_one.context['recipes'],
+                      msg="recipe one should be in response one")
+        self.assertIn(recipe_two, response_two.context['recipes'],
+                      msg="recipe two should be in response two")
+
+        self.assertNotIn(recipe_one, response_two.context['recipes'],
+                         msg="recipe one should not be in response two")
+        self.assertNotIn(recipe_two, response_one.context['recipes'],
+                         msg="recipe two should not be in response one")
+
+        self.assertIn(recipe_one, response_both.context['recipes'],
+                      msg="recipe one should not be in response both")
+        self.assertIn(recipe_two, response_both.context['recipes'],
+                      msg="recipe two should not be in response both")
